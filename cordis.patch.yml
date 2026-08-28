@@ -1,0 +1,14 @@
+# dsh-skill-manager bundle-layer patch
+#
+# Composes the Memory Manager plugin into a DSH profile. The plugin is both a
+# bundle layer (this patch inserts its own loader row) and a `dsh.client`
+# package: once the row exists, dsh-client-modules discovers the browser half
+# via `dsh.client` + `exports["./client"]` and serves it at
+# `/plugins/dsh-skill-manager/client.js`.
+#
+# NOTE: a bare `{ id, name }` row is an id-targeted OVERRIDE and would be
+# skipped for a new id — new rows must use the `insert:` form.
+
+- insert:
+    - id: skill-manager
+      name: dsh-skill-manager

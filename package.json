@@ -1,0 +1,79 @@
+{
+  "name": "dsh-skill-manager",
+  "version": "0.3.0",
+  "description": "DSH Web UI plugin: view and delete your real skills (long-term memories) in ~/.dsh/skills from the sidebar — entries load into every session automatically.",
+  "type": "module",
+  "main": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.mjs"
+    },
+    "./types": {
+      "types": "./lib/types.d.ts",
+      "default": "./lib/types.mjs"
+    },
+    "./client": {
+      "types": "./types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-api-remotes"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "files": [
+    "lib",
+    "types",
+    "cordis.patch.yml"
+  ],
+  "scripts": {
+    "build": "npm run build:host && npm run build:client",
+    "build:host": "node scripts/build-host.mjs && tsc -p tsconfig.types.json",
+    "build:client": "node scripts/build-client.mjs",
+    "watch": "node scripts/build-host.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-typert-protocol": "^0.1.0-rc.7",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-api-remotes": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-locale": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-runtime": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-ui-sidebar": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-ui-slots": "^0.1.0-rc.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-api-remotes": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-locale": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-runtime": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-ui-sidebar": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-client-ui-slots": "^0.1.0-rc.7",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "esbuild": "^0.24.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.6.0"
+  },
+  "license": "MIT"
+}
