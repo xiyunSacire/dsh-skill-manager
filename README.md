@@ -11,7 +11,7 @@ DSH（DeepSeek Harness）Web UI 插件：在左侧边栏增加「记忆管理」
 ```
 
 > ✅ **已在 DSH web profile 实测通过**：真实技能每会话自动加载；插件可查看与删除。
->**重要**：本项目已经提供基础Skill“dsh-skill-manager”将其添加进Skill后即可直接使用Agant一键添加自己想要的各种技能
+**重要**：本项目已经提供基础Skill“dsh-skill-manager”将其添加进Skill后即可直接使用Agant一键添加自己想要的各种技能
 
 
 ## 功能
