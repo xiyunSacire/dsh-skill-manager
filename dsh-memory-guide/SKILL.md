@@ -4,7 +4,7 @@ description: DeepSeek Harness 长期记忆（技能系统）管理指南：如�
 whenToUse: 用户要求查看当前记忆、列出已有技能、说明记忆的存储位置或增删改方法；或新会话中需要了解本机已有哪些长期记忆时。
 metadata:
   created: 2026-08-18
-  source: 由用户在 DSH Web GUI 中实测验证后整理（工作区另有同名 .txt 版本：F:\Draft Folder\对deepseek-harness的Memory模块管理指南.txt）
+  source: 由用户在 DSH Web GUI 中实测验证后整理
 ---
 
 # 对 DeepSeek Harness 的 Memory 模块管理指南
@@ -27,7 +27,7 @@ metadata:
 示例输出格式（每个技能一条）：
    - 技能名：<name>
      描述：<description>
-     存储：C:\Users\19781\.dsh\skills\<name>\SKILL.md
+     存储：~\.dsh\skills\<name>\SKILL.md
      要点：<正文前几行/目录>
 
 
@@ -54,29 +54,28 @@ DeepSeek Harness（DSH）的"长期记忆"核心机制是【技能（Skill）系
 ## 二、存储位置
 
 DSH 配置文件根目录（Harness Home）：
-    DSH_HOME 环境变量，当前为  C:\Users\19781\.dsh
-    （未设置时默认 ~/.dsh，即 C:\Users\19781\.dsh）
+    DSH_HOME 环境变量 ：待补充
+    （未设置时默认 ~/.dsh）
 
 技能扫描根目录（按优先级从高到低）：
 
   Rank 1  项目级：<项目根>/.dsh/skills        （项目根 = 最近含 .git 的祖先目录）
   Rank 2  项目级：<项目根>/.agents/skills
   Rank 3  自定义：配置项 customSkillDirs 指定的目录
-  Rank 4  用户级：<DSH_HOME>/skills           （即 C:\Users\19781\.dsh\skills）
+  Rank 4  用户级：<DSH_HOME>/skills           
   Rank 5  用户级：<agentsHome>/skills         （~/.agents/skills，默认不存在）
 
   · 用户级目录对所有会话、所有项目生效，是放"通用知识"的首选位置。
   · 项目级目录只对该项目生效，适合放项目专属规范。
   · 相同技能名在不同位置时，rank 高者优先。
 
-DSH 用户数据目录中的其他内容：
-    C:\Users\19781\.dsh\sessions\     会话记录存档（JSONL）
-    C:\Users\19781\.dsh\storages\     各类持久化存储
-    C:\Users\19781\.dsh\settings.yaml 设置
-    C:\Users\19781\.dsh\profiles\     配置文件
+DSH 用户数据目录中的其他内容：（待补充）
+    ~\.dsh\sessions\     会话记录存档（JSONL）
+    ~\.dsh\storages\     各类持久化存储
+    ~\.dsh\settings.yaml 设置
+    ~\.dsh\profiles\     配置文件
 
-注意：技能目录在会话工作区（如 F:\Draft Folder）之外。模型在工作区外的
-写操作会被沙箱拦截，需要弹窗批准（权限升级）后才能写入。
+注意：技能目录在会话工作区之外。模型在工作区外的写操作会被沙箱拦截，需要弹窗批准（权限升级）后才能写入。
 
 
 ## 三、记忆的格式（技能 SKILL.md）
@@ -112,7 +111,7 @@ DSH 用户数据目录中的其他内容：
   方式 2：每次会话开始时，模型上下文自动包含技能目录（名称+描述摘要）；
           任务匹配时模型用 skill 工具加载全文。
   方式 3：自己打开文件查看：
-          资源管理器输入  C:\Users\19781\.dsh\skills\ 即可看到所有技能目录。
+          资源管理器输入  ~\.dsh\skills\ 即可看到所有技能目录。（请根据用户当前的具体路径进行补充）
   方式 4：列出目录（PowerShell）：
           Get-ChildItem "$env:USERPROFILE\.dsh\skills" -Recurse
 
@@ -125,7 +124,7 @@ DSH 用户数据目录中的其他内容：
       注意：写入工作区外会弹权限确认，批准即可。
 
   方式 2（手动）：自己创建文件：
-      C:\Users\19781\.dsh\skills\我的技能名\SKILL.md
+      ~\.dsh\skills\我的技能名\SKILL.md
       内容：frontmatter（name 必须 kebab-case，如 my-skill-name）+ 正文。
 
   生效时机：DSH 使用文件监视器（Chokidar）监听技能目录，新建/修改文件后
@@ -137,7 +136,7 @@ DSH 用户数据目录中的其他内容：
 
   方式 1（推荐）：告诉模型"删除 xx 技能/记忆"，模型删除对应目录。
   方式 2（手动）：删除目录/文件，例如：
-      Remove-Item "C:\Users\19781\.dsh\skills\word-doc-editing" -Recurse -Force
+      Remove-Item "~\.dsh\skills\word-doc-editing" -Recurse -Force
   删除后监视器会检测到并从技能目录中移除，新会话不再出现。
 
 
@@ -179,9 +178,5 @@ DSH 用户数据目录中的其他内容：
 
 
 ## 十、当前已有的记忆
-
-  · word-doc-editing —— 本机 Word 文档编辑方法（OOXML 直接生成、
-    Word COM 限制、PowerShell 中文编码陷阱），2026-08-18 存入。
-    文件：C:\Users\19781\.dsh\skills\word-doc-editing\SKILL.md
-  · dsh-memory-guide —— 本指南本身，2026-08-18 存入（即本文件）。
-    文件：C:\Users\19781\.dsh\skills\dsh-memory-guide\SKILL.md
+  · dsh-memory-guide —— 本指南本身（即本文件）。
+    文件：~\.dsh\skills\dsh-memory-guide\SKILL.md
