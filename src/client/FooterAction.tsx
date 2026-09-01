@@ -1,11 +1,11 @@
 /**
- * Sidebar foot entry: opens the Memory Manager panel.
+ * Sidebar foot entry: opens the Skill Manager panel.
  *
  * Registered into the `sidebar.footer.action` list slot (declared by
  * dsh-client-ui-sidebar, rendered above the Settings row in both sidebar
  * widths). Text-only entry per user preference (no icon); the owner `wide`
  * flag only affects layout, both widths render the label.
- * @module dsh-memory-manager/src/client/FooterAction
+ * @module dsh-skill-manager/src/client/FooterAction
  */
 
 import { useState } from 'react'
@@ -20,7 +20,7 @@ export interface FooterActionProps extends SidebarFooterActionOwnerProps {
   readonly t: MemoryManagerTranslator
 }
 
-/** One-click entry to the memory management panel. */
+/** One-click entry to the skill management panel. */
 export function FooterAction(props: FooterActionProps): JSX.Element {
   const { t } = props
   const [open, setOpen] = useState(false)

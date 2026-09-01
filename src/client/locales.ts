@@ -1,9 +1,9 @@
 /**
- * Locale dictionaries for the Memory Manager UI (v2: view + delete skills).
- * @module dsh-memory-manager/src/client/locales
+ * Locale dictionaries for the Skill Manager UI (v2: view + delete skills).
+ * @module dsh-skill-manager/src/client/locales
  */
 
-/** Locale key union for the Memory Manager namespace (declared in the slots LocaleNamespaceMap). */
+/** Locale key union for the Skill Manager namespace (declared in the slots LocaleNamespaceMap). */
 export type MemoryManagerKey =
   | 'entry'
   | 'panelTitle'
@@ -26,14 +26,14 @@ export type MemoryManagerKey =
 export type MemoryManagerLocale = Record<MemoryManagerKey, string>
 
 export const zh: MemoryManagerLocale = {
-  entry: '记忆管理',
-  panelTitle: '记忆管理',
-  panelSubtitle: '本机长期记忆（技能）查看与删除：~/.dsh/skills，每次会话自动加载',
-  tip: '💡 小贴士：要新增记忆，请使用 Agent 添加；新增记忆的流程已记录在长期技能（dsh-memory-guide）中。',
+  entry: '技能管理',
+  panelTitle: '技能管理',
+  panelSubtitle: '本机技能查看与删除：~/.dsh/skills，每次会话自动加载',
+  tip: '💡 小贴士：要新增技能，请使用 Agent 添加；新增技能的流程已记录在长期技能（dsh-skill-management）中。',
   close: '关闭',
   searchPlaceholder: '搜索技能名称或描述…',
   refresh: '刷新',
-  empty: '暂无技能。要新增记忆，请让 Agent 按 dsh-memory-guide 技能中的流程创建。',
+  empty: '暂无技能。要新增技能，请让 Agent 按 dsh-skill-management 技能中的流程创建。',
   loadError: '加载失败',
   delete: '删除',
   whenToUse: '适用场景',
@@ -45,14 +45,14 @@ export const zh: MemoryManagerLocale = {
 }
 
 export const en: MemoryManagerLocale = {
-  entry: 'Memory',
-  panelTitle: 'Memory Manager',
-  panelSubtitle: 'View and delete your long-term memories (skills) in ~/.dsh/skills — loaded into every session',
-  tip: '💡 Tip: to add a new memory, ask an Agent to create it; the flow is documented in the dsh-memory-guide skill.',
+  entry: 'Skills',
+  panelTitle: 'Skill Manager',
+  panelSubtitle: 'View and delete your skills in ~/.dsh/skills — loaded into every session',
+  tip: '💡 Tip: to add a new skill, ask an Agent to create it; the flow is documented in the dsh-skill-management skill.',
   close: 'Close',
   searchPlaceholder: 'Search skill name or description…',
   refresh: 'Refresh',
-  empty: 'No skills yet. Ask an Agent to create one following the dsh-memory-guide skill.',
+  empty: 'No skills yet. Ask an Agent to create one following the dsh-skill-management skill.',
   loadError: 'Failed to load',
   delete: 'Delete',
   whenToUse: 'When to use',

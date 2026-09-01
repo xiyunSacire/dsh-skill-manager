@@ -1,7 +1,7 @@
 {
   "name": "dsh-skill-manager",
   "version": "0.3.0",
-  "description": "DSH Web UI plugin: view and delete your real skills (long-term memories) in ~/.dsh/skills from the sidebar — entries load into every session automatically.",
+  "description": "DSH Web UI plugin: view and delete your skills in ~/.dsh/skills from the sidebar — entries load into every session automatically.",
   "type": "module",
   "main": "lib/index.mjs",
   "types": "lib/index.d.ts",

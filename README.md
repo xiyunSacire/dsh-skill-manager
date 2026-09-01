@@ -1,30 +1,25 @@
 # dsh-skill-manager
 
-DSH（DeepSeek Harness）Web UI 插件：在左侧边栏增加「记忆管理」（Memory Manager）入口，**查看与删除本机真实长期记忆（技能）**——这些技能位于 `~/.dsh/skills`，DSH 会在**每次会话中自动加载**。
+DSH（DeepSeek Harness）Web UI 插件：在左侧边栏增加「技能管理」（Skill Manager）入口，**查看与删除本机技能**——这些技能位于 `~/.dsh/skills`，DSH 会在**每次会话中自动加载**。
 
 ```
-记忆管理  ──点击──▶  全屏面板
+技能管理  ──点击──▶  全屏面板
                    ├─ 列出全部技能（名称/描述/适用场景）
                    ├─ 搜索过滤
                    ├─ 单个删除（仅用户技能目录内的）
-                   └─ 小贴士：新增记忆请使用 Agent（流程见 dsh-memory-guide 技能）
+                   └─ 小贴士：新增技能请使用 Agent（流程见 dsh-skill-management 技能）
 ```
 
-> ✅ **已在 DSH web profile 实测通过**：真实技能每会话自动加载；插件可查看与删除。
-
-**重要**：本项目已经提供基础Skill“dsh-skill-manager”将其添加进Skill后即可直接使用Agant一键添加自己想要的各种技能。
-
-**添加方法**：将文件夹dsh-skill-manager整个放入~/.dsh/skills路径即可，找不到路径可以直接让Agant帮你放。
-
+> ✅ **已在 DSH Desktop 2.0.3（web profile 模板）实测通过**：真实技能每会话自动加载；插件可查看与删除。
 
 ## 功能
 
 | 需求 | 实现 |
 |---|---|
 | 左侧边栏入口 | 注册进 `sidebar.footer.action` 槽（侧边栏底部、设置按钮上方），纯文字入口 |
-| 查看 | `memoryManager.list`：读取 直接扫描 `~/.dsh/skills` 目录（与技能发现同布局，frontmatter 最小解析描述），按名称/描述搜索 |
+| 查看 | `memoryManager.list`：直接扫描 `~/.dsh/skills` 目录（与技能发现同布局，frontmatter 最小解析描述），按名称/描述搜索 |
 | 删除 | `memoryManager.delete`：删除用户技能目录（`~/.dsh/skills/<name>/SKILL.md` 或 `<name>.md`）中的技能；bundled/项目技能受保护不可删 |
-| 新增记忆 | **不在插件内提供**——通过 Agent 创建（写入 `~/.dsh/skills` 下的 SKILL.md，流程记录在 `dsh-memory-guide` 技能中），面板顶部有小贴士指引 |
+| 新增技能 | **不在插件内提供**——通过 Agent 创建（写入 `~/.dsh/skills` 下的 SKILL.md，流程记录在 `dsh-skill-management` 技能中），面板顶部有小贴士指引 |
 | 主题适配 | 全部使用 DSH 设计令牌 `--dsw-alias-*`，自动适配深色/浅色主题 |
 | 国际化 | zh / en 双语言字典，随 DSH locale 切换 |
 
@@ -126,9 +121,9 @@ client-modules: client bundle not found; run `pnpm run build` before launch
 ## 使用
 
 1. 启动 DSH Web UI（桌面应用内嵌即同一界面，或浏览器打开 `http://127.0.0.1:43120`）
-2. 左侧边栏底部「记忆管理」入口 → 打开面板 → 看到本机全部技能（= 长期记忆）
+2. 左侧边栏底部「技能管理」入口 → 打开面板 → 看到本机全部技能
 3. 搜索、删除（仅限用户技能目录内的）
-4. **新增记忆**：让 Agent 按 `dsh-memory-guide` 技能的流程创建（写入 `~/.dsh/skills/<name>/SKILL.md`），下一次会话自动加载
+4. **新增技能**：让 Agent 按 `dsh-skill-management` 技能的流程创建（写入 `~/.dsh/skills/<name>/SKILL.md`），下一次会话自动加载
 
 ## 架构与真实 API 映射
 
@@ -161,8 +156,8 @@ client-modules: client bundle not found; run `pnpm run build` before launch
 **删除按钮是灰的**
 → 该技能不在用户技能目录（可能是 bundled/项目技能），插件只允许删除 `~/.dsh/skills` 下的用户技能。
 
-**新增记忆**
-→ 插件不做新增。让 Agent 按 `dsh-memory-guide` 技能流程创建 SKILL.md（写入 `~/.dsh/skills`），下一次会话自动加载。
+**新增技能**
+→ 插件不做新增。让 Agent 按 `dsh-skill-management` 技能流程创建 SKILL.md（写入 `~/.dsh/skills`），下一次会话自动加载。
 
 ## License
 

@@ -1,17 +1,17 @@
 /**
- * Memory Manager panel (v2): view + search + delete REAL DSH skills.
+ * Skill Manager panel (v2): view + search + delete REAL DSH skills.
  *
  * Full-screen overlay listing the skills DSH loads into every session
- * (`ctx.skills` — the registry view), with a tip that new memories are added
- * through the Agent flow (dsh-memory-guide skill). Rendered through a portal
+ * (`ctx.skills` — the registry view), with a tip that new skills are added
+ * through the Agent flow (dsh-skill-management skill). Rendered through a portal
  * into document.body. Styling uses DSH design tokens (`--dsw-alias-*`), so
  * the panel adapts to the active dark/light theme.
- * @module dsh-memory-manager/src/client/MemoryManagerPanel
+ * @module dsh-skill-manager/src/client/MemoryManagerPanel
  */
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { memoryApi } from './api.ts'
+import { skillApi } from './api.ts'
 import type { SkillItem } from '../types.ts'
 import type { MemoryManagerTranslator } from './locales.ts'
 import styles from './MemoryManager.module.css'
@@ -24,7 +24,7 @@ export interface MemoryManagerPanelProps {
   readonly onClose: () => void
 }
 
-/** Full memory (skill) management panel: view + delete only. */
+/** Full skill management panel: view + delete only. */
 export function MemoryManagerPanel(props: MemoryManagerPanelProps): JSX.Element {
   const { t, onClose } = props
   const [skills, setSkills] = useState<readonly SkillItem[]>([])
@@ -36,7 +36,7 @@ export function MemoryManagerPanel(props: MemoryManagerPanelProps): JSX.Element 
     setLoading(true)
     setError(undefined)
     try {
-      const result = await memoryApi.list()
+      const result = await skillApi.list()
       if (!result.ok) {
         setError(`${t('loadError')}: ${result.error.message}`)
         return
@@ -64,7 +64,7 @@ export function MemoryManagerPanel(props: MemoryManagerPanelProps): JSX.Element 
 
   const deleteSkill = async (skill: SkillItem): Promise<void> => {
     if (!window.confirm(t('confirmDeleteBody', { name: skill.name }))) return
-    const result = await memoryApi.delete({ name: skill.name })
+    const result = await skillApi.delete({ name: skill.name })
     if (!result.ok) {
       setError(result.error.message)
       return

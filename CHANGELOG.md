@@ -4,7 +4,7 @@
 ## [0.3.0] — 2026-08-29
 
 ### Changed
-- **Renamed package to `dsh-skill-manager`** (it manages the DSH skill system, a.k.a. long-term memory).
+- **Renamed package to `dsh-skill-manager`** (it manages the DSH skill system).
 - `list` now scans `~/.dsh/skills` directly (directory bundles + flat `.md`, minimal frontmatter description
   parsing) instead of `ctx.skills.list()`, which returned empty in the plugin context. No dependency on the
   skill registry; verified locally against the real directory.
@@ -23,8 +23,8 @@ All notable changes to **dsh-skill-manager** are documented here.
   protected).
 - **Features simplified to view + delete** per user request: scope
   (global/project/session), tags, create/edit, and JSON/Markdown
-  import/export were removed. New memories are created through the Agent flow
-  documented in the `dsh-memory-guide` skill — the panel shows a tip pointing
+  import/export were removed. New skills are created through the Agent flow
+  documented in the `dsh-skill-management` skill — the panel shows a tip pointing
   there.
 - Storage model note: skills live per-installation (`$DSH_HOME/skills`,
   shared across profiles), matching how real skills behave.
@@ -68,11 +68,11 @@ All notable changes to **dsh-skill-manager** are documented here.
 ## [0.1.0] — 2026-08-18
 
 ### Added
-- Initial plugin: sidebar「记忆管理」entry (registered into
+- Initial plugin: sidebar「技能管理」entry (registered into
   `sidebar.footer.action`), full-screen management panel, CRUD + bulk delete,
   JSON/Markdown import/export, scope filter + search, zh/en locales, DSH
   theme-token styling.
-- Host half: `memoryManager` Typert Remote service over a `memory_manager`
+- Host half: `skillManager` Typert Remote service over a `memory_manager`
   storage domain (`~/.dsh/storages/memory_manager.json`).
 - Client bundle built to the `window.__ModuleLoader__.load({ id, factory })`
   handoff format consumed by `dsh-client-modules`.

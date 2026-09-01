@@ -1,13 +1,13 @@
 /**
- * Memory Manager — Client half (browser plugin entry).
+ * Skill Manager — Client half (browser plugin entry).
  *
  * Registers the `skillManager` Remote namespace (Host RPC), a locale
  * dictionary, and the sidebar foot entry that opens the management panel.
  * The bundle is built by `scripts/build-client.mjs` into the
  * `window.__ModuleLoader__.load({ id, factory })` handoff the browser loader
  * consumes; `dsh.client` in package.json makes client-modules serve it at
- * `/plugins/dsh-memory-manager/client.js`.
- * @module dsh-memory-manager/src/client
+ * `/plugins/dsh-skill-manager/client.js`.
+ * @module dsh-skill-manager/src/client
  */
 
 // Type-only: service contracts and the locale plugin's Context merge.
@@ -27,7 +27,7 @@ export { FooterAction, NS }
 
 declare module '@deepseek-ai/dsh-client-ui-slots' {
   interface LocaleNamespaceMap {
-    /** Memory Manager UI copy. */
+    /** Skill Manager UI copy. */
     skillManager: MemoryManagerKey
   }
 }
@@ -54,9 +54,9 @@ export async function apply(ctx: ClientContext): Promise<() => Promise<void>> {
   try {
     disposeRemote = await ctx.remote.$mount(skillManagerRemote)
   } catch (error) {
-    console.error('[memory-manager] failed to mount Remote namespace:', error)
+    console.error('[skill-manager] failed to mount Remote namespace:', error)
   }
-  ctx.effect(() => () => { void disposeRemote?.() }, 'memory-manager: remote mount')
+  ctx.effect(() => () => { void disposeRemote?.() }, 'skill-manager: remote mount')
 
   const bound = ctx.locale.bind(NS)
   const t = (key: MemoryManagerKey, params?: Record<string, string | number>): string => {
@@ -83,7 +83,7 @@ export async function apply(ctx: ClientContext): Promise<() => Promise<void>> {
     try {
       const dispose = ctx.slots.register({
         name: 'sidebar.footer.action',
-        id: 'memory-manager',
+        id: 'skill-manager',
         order: 10,
         label: () => t('entry'),
         locale: NS,
@@ -91,7 +91,7 @@ export async function apply(ctx: ClientContext): Promise<() => Promise<void>> {
       entryRegistered = true
       return dispose
     } catch (error) {
-      console.error('[memory-manager] sidebar entry registration failed:', error)
+      console.error('[skill-manager] sidebar entry registration failed:', error)
       return () => {}
     }
   })

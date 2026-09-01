@@ -1,5 +1,5 @@
 /**
- * Memory Manager — Host half (v2: manages the REAL DSH skill directory).
+ * Skill Manager — Host half (v2: manages the REAL DSH skill directory).
  *
  * A Typert Remote service (`skillManager` namespace) exposing two endpoints
  * over the user skill directory `~/.dsh/skills`:
@@ -11,8 +11,8 @@
  *   bundle `<name>/SKILL.md` or flat `<name>.md`). Bundled/project skills are
  *   never touched.
  *
- * Creating skills is intentionally NOT exposed: new memories go through the
- * agent flow documented in the `dsh-memory-guide` skill (write a SKILL.md
+ * Creating skills is intentionally NOT exposed: new skills go through the
+ * agent flow documented in the `dsh-skill-management` skill (write a SKILL.md
  * into `~/.dsh/skills`), which is exactly what makes them load in every
  * session.
  *
