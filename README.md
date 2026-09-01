@@ -1,5 +1,9 @@
 # dsh-skill-manager
 
+> **重要**：本项目已提供基础 Skill「dsh-skill-management」，将其添加进 Skill 后即可直接使用 Agent 一键添加自己想要的各种技能。
+>
+> **添加方法**：将文件夹 `dsh-skill-management` 整个放入 `~/.dsh/skills` 路径即可，找不到路径可以直接让 Agent 帮你放。
+
 DSH（DeepSeek Harness）Web UI 插件：在左侧边栏增加「技能管理」（Skill Manager）入口，**查看与删除本机技能**——这些技能位于 `~/.dsh/skills`，DSH 会在**每次会话中自动加载**。
 
 ```
