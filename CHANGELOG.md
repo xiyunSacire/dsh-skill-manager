@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.4.0] — 2026-10-10
+
+### Changed
+- **Migrated to `@deepseek-ai` 0.2.0-rc.2**（DSH desktop 2.0.17）。Typert strict codec 从
+  `{ mode:'strict', typeSymbol, schema: z.any() }` 改为
+  `{ mode:'strict', typeSymbol, create: () => z.any() }`（0.2.x 的 `dsh-typert-registry`
+  要求 `create()` 工厂，否则 host 构造抛 `strict codec has no create() factory`）。
+- 依赖对齐 0.2.0-rc.2（cordis 4.0.4）。
+- 移除 0.2.x 已删除的 `@deepseek-ai/dsh-client-runtime`（`dsh.client.inject` 与 peerDeps）。
 
 ## [0.3.0] — 2026-08-29
 

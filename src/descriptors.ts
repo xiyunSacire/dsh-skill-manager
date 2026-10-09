@@ -18,9 +18,9 @@
 import { z } from 'zod'
 import type { InvocationDescriptor, TypertCodec } from '@deepseek-ai/dsh-typert-protocol'
 
-/** Strict pass-through codec (schema.parse accepts anything). */
+/** Strict pass-through codec (create() returns a z.any() passthrough schema). */
 function strictCodec(typeSymbol: string): TypertCodec {
-  return { mode: 'strict', typeSymbol, schema: z.any() }
+  return { mode: 'strict', typeSymbol, create: () => z.any() }
 }
 
 /** One JSON request parameter (wire name `request`, matching the host method signature). */

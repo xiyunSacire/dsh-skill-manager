@@ -14,7 +14,7 @@ DSH（DeepSeek Harness）Web UI 插件：在左侧边栏增加「技能管理」
                    └─ 小贴士：新增技能请使用 Agent（流程见 dsh-skill-management 技能）
 ```
 
-> ✅ **已在 DSH Desktop 2.0.3（web profile 模板）实测通过**：真实技能每会话自动加载；插件可查看与删除。
+> ✅ **已在 DSH Desktop 2.0.17（@deepseek-ai 0.2.0-rc.2 平台，web profile）实测通过**：真实技能每会话自动加载；插件可查看与删除。
 
 ## 功能
 
@@ -148,6 +148,11 @@ client-modules: client bundle not found; run `pnpm run build` before launch
 - 依赖 web bundle 提供的服务：`api-gateway`（Typert Gateway）。。headless/纯 CLI profile 未挂载这些行时，插件 fiber 会因缺注入而 FAILED——本插件定位即 Web UI 插件，属预期。
 - client 半 peer 依赖 `react`、`react-dom`、`@deepseek-ai/dsh-client-*`：它们由浏览器的模块表（module table）提供，**不会被**打进 `lib/client.js`（构建脚本已全部 external）。
 - 技能存储在 `$DSH_HOME/skills`（默认 `~/.dsh/skills`），desktop/web 等 profile 共享同一目录。
+
+## 版本历史
+
+- **v0.4.0（2026-10）**：适配 DSH desktop 2.0.17 的 `@deepseek-ai` 0.2.0-rc.2 平台。Typert strict codec 从 0.1.x 的 `{ mode:'strict', typeSymbol, schema: z.any() }` 迁移为 0.2.x 的 `{ mode:'strict', typeSymbol, create: () => z.any() }`（0.2.x 的 `dsh-typert-registry` 要求 `create()` 工厂，否则 host 构造时抛 `strict codec has no create() factory`）；依赖对齐 0.2.0-rc.2（cordis 4.0.4）；移除 0.2.x 已删除的 `@deepseek-ai/dsh-client-runtime`（`dsh.client.inject` 与 peerDeps 中删除）。
+- **v0.3.0 及更早**：基于 `@deepseek-ai` 0.1.0-rc.x 平台。
 
 ## 常见问题
 
