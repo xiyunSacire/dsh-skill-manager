@@ -11,7 +11,7 @@
  */
 
 // Type-only: service contracts and the locale plugin's Context merge.
-import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
+import type { Context } from '@deepseek-ai/cordis'
 import type {} from '@deepseek-ai/dsh-client-locale/client'
 import type {} from '@deepseek-ai/dsh-client-ui-sidebar/client'
 import type {} from '@deepseek-ai/dsh-client-ui-slots'
@@ -32,6 +32,17 @@ declare module '@deepseek-ai/dsh-client-ui-slots' {
   }
 }
 
+// 0.2.x 里 `slots` 服务由 App 内置的 dsh-client-ui-renderer 提供，第三方插件
+// 依赖里没有它的类型声明；这里补一个最小形状（inject + register）。
+declare module '@deepseek-ai/cordis' {
+  interface Context {
+    slots: {
+      inject(name: string, setup: () => (() => void) | void): void
+      register(options: Record<string, unknown>, component: unknown): () => void
+    }
+  }
+}
+
 /** Services required by this plugin. */
 export const inject = ['slots', 'locale', 'remote']
 
@@ -41,7 +52,7 @@ export const inject = ['slots', 'locale', 'remote']
  * @param ctx - client root context.
  * @returns disposer that unmounts the Remote namespace.
  */
-export async function apply(ctx: ClientContext): Promise<() => Promise<void>> {
+export async function apply(ctx: Context): Promise<() => Promise<void>> {
   ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'memory-manager: dictionaries')
 
   // Bind the api facade to this context before mounting (components call it).

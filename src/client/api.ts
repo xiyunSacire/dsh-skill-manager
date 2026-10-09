@@ -9,7 +9,7 @@
  * @module dsh-skill-manager/src/client/api
  */
 
-import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
+import type { Context } from '@deepseek-ai/cordis'
 import type { RemoteResult } from '@deepseek-ai/dsh-typert-protocol'
 import type { SkillDeleteRequest, SkillDeleteValue, SkillListValue } from '../types.ts'
 
@@ -19,10 +19,10 @@ export interface SkillManagerNamespace {
   delete(request: SkillDeleteRequest, signal?: AbortSignal): Promise<RemoteResult<SkillDeleteValue>>
 }
 
-let bound: ClientContext | undefined
+let bound: Context | undefined
 
 /** Bind the plugin context once, inside apply(). */
-export function bindMemoryManagerApi(ctx: ClientContext): void {
+export function bindMemoryManagerApi(ctx: Context): void {
   bound = ctx
 }
 
